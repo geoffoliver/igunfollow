@@ -25,7 +25,7 @@ class InstagramController extends AppController
         $this->instagram = new Instagram([
             'apiKey'      => 'ac288b4f814a4cc2a738fbde35926970',
             'apiSecret'   => '7e6c4e85e9084ec1bbc1b5c017b27af5',
-            'apiCallback' => 'http://igunfollow.dev.plan8home.com'
+            'apiCallback' => 'http://unfollow.plan8studios.com'
         ]);
 
         if($igData = $this->request->session()->read('igdata')){
