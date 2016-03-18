@@ -29,14 +29,14 @@ if($loggedIn){
     }
     echo '</div>';
     echo $this->Html->div('none-to-unfollow', $this->Html->div('alert alert-success', implode('', [
-        $this->Html->tag('h4', __('Hell yeah!')),
-        $this->Html->para('', __('There\'s nobody to unfollow!'))
+        $this->Html->tag('h4', __('Congratulations!')),
+        $this->Html->para('', __('Balance has been achieved. Everything is right with the world.'))
     ])));
 }else{
-    echo $this->Html->tag('h2', __('Unfollow people who don\'t follow you back.'));
-    echo $this->Html->para('lead', __('This will show you a list of people who you follow but do not follow you back and let you easily unfollow them. Enjoy.'));
+    echo $this->Html->tag('h2', __('Do you follow a lot of people?'));
+    echo $this->Html->para('lead', __('Let us show who isn\'t following you back so you can easily unfollow them.'));
     echo '<hr>';
-    echo $this->Html->div('text-center', $this->Html->link('Let\'s Do It!', [
+    echo $this->Html->div('text-center', $this->Html->link('OK, let\'s do it!', [
         'controller'=>'Instagram', 'action'=>'login'
     ], [
         'class' => 'btn btn-lg btn-success'
