@@ -10,8 +10,10 @@
             body{
                 margin-top: 70px;
             }
+            #navbar li img{
+                margin: -32px 0 -32px;
+            }
         </style>
-        <?= $this->fetch('script') ?>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -24,8 +26,8 @@
                     <ul class="nav navbar-nav navbar-right">
                     <li role="presentation"><a href="/logout">Logout
                         <?= $this->Html->image($user->data->profile_picture, [
-                            'class' => 'img-circle',
-                            'style' => 'width: 16px; display: inline-block; margin-left: 10px;'
+                            'class' => 'img-rounded',
+                            'style' => 'width: 32px; display: inline-block; margin-left: 10px;'
                         ]) ?></a>
                     </li>
                     </ul>
@@ -41,5 +43,6 @@
                 </div>
             </div>
         </div>
+        <?= $this->Html->script('//code.jquery.com/jquery-2.2.1.min.js'); ?>
     </body>
 </html>

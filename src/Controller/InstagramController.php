@@ -87,8 +87,8 @@ class InstagramController extends AppController
         return $this->redirect('/');
     }
 
-    public function remove($id){
-        if(!$this->request->is('post')){
+    public function unfollow($id){
+        if(!$this->request->is('post') || !$this->request->is('ajax')){
             return $this->redirect('/');
         }
 
@@ -101,7 +101,5 @@ class InstagramController extends AppController
         $this->set('_serialize', [
             'deleted' => $deleted
         ]);
-
-        debug($this->request->data);
     }
 }

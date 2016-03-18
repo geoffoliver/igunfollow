@@ -50,7 +50,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Instagram', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Instagram', 'action' => 'login']);
-    $routes->connect('/remove', ['controller' => 'Instagram', 'action' => 'remove']);
+    $routes->connect('/unfollow', ['controller' => 'Instagram', 'action' => 'unfollow']);
     $routes->connect('/logout', ['controller' => 'Instagram', 'action' => 'logout']);
 
     /**
