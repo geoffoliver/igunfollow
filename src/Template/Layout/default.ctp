@@ -3,9 +3,7 @@
     <head>
         <?= $this->Html->charset() ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            <?= $this->fetch('title') ?>
-        </title>
+        <title>igunfollow</title>
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') ?>
         <?= $this->fetch('meta') ?>
@@ -21,7 +19,7 @@
                 <?php if($loggedIn): ?>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li role="presentation" class="active"><a href="/logout">Logout</a></li>
+                        <li role="presentation"><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
                 <? endif; ?>

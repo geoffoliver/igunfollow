@@ -27,7 +27,6 @@ class InstagramController extends AppController
             $this->loggedIn = true;
             $this->instagram->setAccessToken($igData);
         }
-
         $this->set('loggedIn', $this->loggedIn);
     }
 
