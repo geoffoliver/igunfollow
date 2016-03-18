@@ -16,6 +16,11 @@ class InstagramController extends AppController
     private $instagram;
     private $loggedIn = false;
 
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
+
     public function beforeFilter(Event $event){
         $this->instagram = new Instagram([
             'apiKey'      => 'ac288b4f814a4cc2a738fbde35926970',
@@ -101,9 +106,11 @@ class InstagramController extends AppController
             $deleted = true;
         }
 
-        $this->set('_serialize', [
+        $this->set([
             'deleted' => $deleted,
-            't' => Hash::get($this->request->query, 't')
+            't' => Hash::get($this->request->data, 't')
         ]);
+
+        $this->set('_serialize', ['deleted', 't']);
     }
 }

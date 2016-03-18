@@ -21,6 +21,12 @@
             .media.removing{
                 display: none;
             }
+            .none-to-unfollow{
+                display: none;
+            }
+            .not-following-back:empty + .none-to-unfollow{
+                display: block;
+            }
         </style>
     </head>
     <body>

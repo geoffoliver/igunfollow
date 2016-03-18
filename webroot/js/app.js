@@ -3,6 +3,8 @@ $(document).ready(function(){
     var elements = {};
 
     var removeSuccess = function(resp){
+        console.log(elements);
+        console.log(resp.t);
         if(elements.hasOwnProperty(resp.t)){
             if(resp.deleted === true){
                 elements[resp.t].remove();
@@ -24,9 +26,9 @@ $(document).ready(function(){
 
         media.addClass('removing');
 
-        elements[e.timestamp] = media;
+        elements[e.timeStamp] = media;
 
-        $.post(url, {t: e.timestamp}).
+        $.post(url, {t: e.timeStamp}).
             done(removeSuccess).
             error(removeError);
 
