@@ -101,16 +101,42 @@ class InstagramController extends AppController
         }
 
         $deleted = false;
+        $message = false;
 
-        if($this->instagram->modifyRelationship('unfollow', $id)){
-            $deleted = true;
+        $limit = 60;
+        $history = $this->request->session()->read('unfollowed');
+        if(!$history){
+            $history = [];
         }
+
+        $now = time();
+        $earliest = $now;
+        if($history){
+            $earliest = $history[0];
+        }
+
+        if(count($history) >= $limit && $earliest > ($now - HOUR)){
+            $message = __('You\'ve reached your hourly limit ({0}). Try again soon.', $limit);
+        }else{
+            $unfollow = $this->instagram->modifyRelationship('unfollow', $id);
+            if($unfollow->meta->code == 200 &&
+                $unfollow->data->outgoing_status == 'none'
+            ){
+                $history[]= $now;
+                $deleted = true;
+            }else{
+                $message = __('Unable to unfollow. Try again later.');
+            }
+        }
+
+        $this->request->session()->write('unfollowed', array_slice($history, -60));
 
         $this->set([
             'deleted' => $deleted,
-            't' => Hash::get($this->request->data, 't')
+            't' => Hash::get($this->request->data, 't'),
+            'message' => $message
         ]);
 
-        $this->set('_serialize', ['deleted', 't']);
+        $this->set('_serialize', ['deleted', 't', 'message']);
     }
 }
