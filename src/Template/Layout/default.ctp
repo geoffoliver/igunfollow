@@ -13,6 +13,14 @@
             #navbar li img{
                 margin: -32px 0 -32px;
             }
+            .media + .media{
+                border-top: 1px solid #DDD;
+                margin: 15px 0 0;
+                padding: 15px 0 0;
+            }
+            .media.removing{
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -44,5 +52,6 @@
             </div>
         </div>
         <?= $this->Html->script('//code.jquery.com/jquery-2.2.1.min.js'); ?>
+        <?= $this->Html->script('/js/app.js'); ?>
     </body>
 </html>

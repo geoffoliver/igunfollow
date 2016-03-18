@@ -32,8 +32,9 @@ class InstagramController extends AppController
     }
 
     public function index(){
-        $usersFollowedByMe = [];
+        $usersFollowingMe = [];
         $usersIAmFollowing = [];
+        $notFollowingBack = [];
         $user = [];
 
         if($code = Hash::get($this->request->query, 'code')){
@@ -55,22 +56,24 @@ class InstagramController extends AppController
                 $follower = $this->instagram->getUserFollower();
                 do{
                     foreach($follower->data as $f){
-                        $usersIAmFollowing[]= $f;
+                        $usersFollowingMe[$f->id]= $f;
                     }
                 }while($follower = $this->instagram->pagination($follower));
 
                 $follows = $this->instagram->getUserFollows();
                 do{
                     foreach($follows->data as $f){
-                        $usersFollowedByMe[]= $f;
+                        $usersIAmFollowing[$f->id]= $f;
                     }
                 }while($follows = $this->instagram->pagination($follows));
                 $this->set('media', $this->instagram->getUserMedia());
             }catch(Exception $ex){
                 return $this->redirect('/logout');
             }
+
+            $notFollowingBack = array_diff_key($usersIAmFollowing, $usersFollowingMe);
         }
-        $this->set(compact('user', 'usersFollowedByMe', 'usersIAmFollowing'));
+        $this->set(compact('user', 'notFollowingBack'));//'usersIAmFollowing', 'usersFollowingMe'));
     }
 
     public function login(){
@@ -99,7 +102,8 @@ class InstagramController extends AppController
         }
 
         $this->set('_serialize', [
-            'deleted' => $deleted
+            'deleted' => $deleted,
+            't' => Hash::get($this->request->query, 't')
         ]);
     }
 }

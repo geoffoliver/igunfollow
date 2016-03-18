@@ -7,14 +7,16 @@ if($loggedIn){
         $this->Html->para('lead', __('These are the people you are following that aren\'t following you back.'))
     ]));
 
-    foreach($usersIAmFollowing as $user){
+    foreach($notFollowingBack as $user){
         echo $this->Html->div('media', implode('', [
-            $this->Html->div('media-left', $this->Html->image($user->profile_picture)),
+            $this->Html->div('media-left', $this->Html->image($user->profile_picture, [
+                'class' => 'img-rounded'
+            ])),
             $this->Html->div('media-body', implode('', [
                 $this->Html->tag('h4', $user->username, [
                     'class' => 'media-heading'
                 ]),
-                $this->Html->div('', $this->Form->postLink(__('Unfollow'), [
+                $this->Html->div('', $this->Html->link(__('Unfollow'), [
                     'controller' => 'Instagram',
                     'action' => 'unfollow',
                     $user->id
