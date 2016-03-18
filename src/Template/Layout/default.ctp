@@ -10,6 +10,22 @@
             body{
                 margin-top: 70px;
             }
+            .navbar-header{
+                float: left;
+            }
+            #navbar{
+                float: right;
+                margin: 0;
+            }
+            #navbar ul{
+                margin: 0;
+                padding: 0;
+            }
+            #navbar a{
+                padding-top: 14px;
+                padding-bottom: 14px;
+                padding-right: 0;
+            }
             #navbar li img{
                 margin: -32px 0 -32px;
             }
@@ -17,6 +33,9 @@
                 border-top: 1px solid #DDD;
                 margin: 15px 0 0;
                 padding: 15px 0 0;
+            }
+            .media img{
+                max-width: 100px;
             }
             .media.removing{
                 display: none;
@@ -36,7 +55,7 @@
                     <span class="navbar-brand">The Unfollowing</span>
                 </div>
                 <?php if($loggedIn): ?>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar">
                     <ul class="nav navbar-nav navbar-right">
                     <li role="presentation"><a href="/logout">Logout
                         <?= $this->Html->image($user->data->profile_picture, [

@@ -1,11 +1,9 @@
 <?php
 
 if($loggedIn){
-
-    echo $this->Html->div('jumbotron', implode('', [
-        $this->Html->tag('h2', __('Hi, {0}', [$user->data->username])),
-        $this->Html->para('lead', __('These are the people you are following that aren\'t following you back.'))
-    ]));
+    echo $this->Html->tag('h2', __('Hi, {0}', [$user->data->full_name ? $user->data->full_name : $user->data->username]));
+    echo $this->Html->para('lead', __('These are the people that aren\'t following you back.'));
+    echo '<hr>';
 
     echo '<div class="not-following-back">';
     if($notFollowingBack){
@@ -15,7 +13,7 @@ if($loggedIn){
                     'class' => 'img-rounded'
                 ])),
                 $this->Html->div('media-body', implode('', [
-                    $this->Html->tag('h4', $user->username, [
+                    $this->Html->tag('h4', $user->full_name ? $user->full_name : $user->username, [
                         'class' => 'media-heading'
                     ]),
                     $this->Html->div('', $this->Html->link(__('Unfollow'), [
@@ -36,7 +34,7 @@ if($loggedIn){
     ])));
 }else{
     echo $this->Html->tag('h2', __('Unfollow people who don\'t follow you back.'));
-    echo $this->Html->para('lead', __('This will show you a list of people who you follow but do not follow you back. You can then unfollow those people selectively or all at once. Enjoy.'));
+    echo $this->Html->para('lead', __('This will show you a list of people who you follow but do not follow you back and let you easily unfollow them. Enjoy.'));
     echo '<hr>';
     echo $this->Html->div('text-center', $this->Html->link('Let\'s Do It!', [
         'controller'=>'Instagram', 'action'=>'login'
