@@ -1,7 +1,9 @@
 <?php
 
 if($loggedIn){
-    echo $this->Html->tag('h2', __('Who do you want to get rid of?'));
+    debug($media);
+
+    echo $this->Html->tag('h2', __('Hi, {0}. Who do you want to unfollow?', [$user->data->username]));
 
     echo $this->Form->create('Instagram', [
         'url' => '/cleanup'
