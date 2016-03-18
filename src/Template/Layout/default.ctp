@@ -13,29 +13,25 @@
         <?= $this->fetch('script') ?>
     </head>
     <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <span class="navbar-brand">igunfollow</span>
+                </div>
+                <?php if($loggedIn): ?>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation" class="active"><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <? endif; ?>
+            </div>
+        </nav>
         <div class="container">
             <div class="header clearfix">
                 <nav>
-                    <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
-                    </ul>
                 </nav>
                 <h3 class="text-muted">igunfollow</h3>
-            </div>
-            <div class="jumbotron">
-                <h1>Hey there</h1>
-                <p class="lead">Do your shit</p>
-                <?php
-                if(!$loggedIn){
-                    echo $this->Html->link('Let\'s Do It!', [
-                        'controller'=>'Instagram', 'action'=>'login'
-                    ], [
-                        'class' => 'btn btn-lg btn-success'
-                    ]);
-                }
-                ?>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -43,9 +39,6 @@
                     <?= $this->fetch('content') ?>
                 </div>
             </div>
-            <footer class="footer">
-                <p>&copy; 2015 Company, Inc.</p>
-            </footer>
         </div>
     </body>
 </html>

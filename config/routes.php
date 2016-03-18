@@ -50,6 +50,8 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Instagram', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Instagram', 'action' => 'login']);
+    $routes->connect('/cleanup', ['controller' => 'Instagram', 'action' => 'cleanup']);
+    $routes->connect('/logout', ['controller' => 'Instagram', 'action' => 'logout']);
 
     /**
      * Connect catchall routes for all controllers.

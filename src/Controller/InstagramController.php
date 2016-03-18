@@ -14,6 +14,7 @@ use MetzWeb\Instagram\Instagram;
 class InstagramController extends AppController
 {
     private $instagram;
+    private $loggedIn = false;
 
     public function beforeFilter(Event $event){
         $this->instagram = new Instagram([
@@ -21,6 +22,13 @@ class InstagramController extends AppController
             'apiSecret'   => 'b4ae52f374b341beb098a51f63e3d0b0',
             'apiCallback' => 'http://localhost:8765'
         ]);
+
+        if($igData = $this->request->session()->read('igdata')){
+            $this->loggedIn = true;
+            $this->instagram->setAccessToken($igData);
+        }
+
+        $this->set('loggedIn', $this->loggedIn);
     }
 
     public function index(){
@@ -36,11 +44,20 @@ class InstagramController extends AppController
             ]);
         }
 
-        if($igData = $this->request->session()->read('igdata')){
-            $this->instagram->setAccessToken($igData);
+        if($this->loggedIn){
+            $follower = $this->instagram->getUserFollower();
+            do{
+                foreach($follower->data as $f){
+                    $usersIAmFollowing[]= $f;
+                }
+            }while($follower = $this->instagram->pagination($follower));
 
-            $usersFollowedByMe = $this->instagram->getUserFollows();
-            $usersIAmFollowing = $this->instagram->getUserFollower();
+            $follows = $this->instagram->getUserFollows();
+            do{
+                foreach($follows->data as $f){
+                    $usersFollowedByMe[]= $f;
+                }
+            }while($follows = $this->instagram->pagination($follows));
         }
 
         $this->set(compact('usersFollowedByMe', 'usersIAmFollowing'));
@@ -54,7 +71,16 @@ class InstagramController extends AppController
         ]));
     }
 
+    public function logout(){
+        $this->request->session()->delete('igdata');
+        return $this->redirect('/');
+    }
+
     public function cleanup(){
+        if(!$this->request->is('post')){
+            return $this->redirect('/');
+        }
+
         debug($this->request->data);
     }
 }
