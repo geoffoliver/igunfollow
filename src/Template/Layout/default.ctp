@@ -6,8 +6,6 @@
         <title>The Unfollowing</title>
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') ?>
-        <?= $this->fetch('meta') ?>
-        <?= $this->fetch('css') ?>
         <style type="text/css">
             body{
                 margin-top: 70px;
@@ -30,7 +28,6 @@
                             'style' => 'width: 16px; display: inline-block; margin-left: 10px;'
                         ]) ?></a>
                     </li>
-
                     </ul>
                 </div>
                 <? endif; ?>

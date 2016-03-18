@@ -19,7 +19,7 @@ class InstagramController extends AppController
     public function beforeFilter(Event $event){
         $this->instagram = new Instagram([
             'apiKey'      => 'ac288b4f814a4cc2a738fbde35926970',
-            'apiSecret'   => 'b4ae52f374b341beb098a51f63e3d0b0',
+            'apiSecret'   => '7e6c4e85e9084ec1bbc1b5c017b27af5',
             'apiCallback' => 'http://igunfollow.dev.plan8home.com'
         ]);
 
@@ -76,6 +76,7 @@ class InstagramController extends AppController
     public function login(){
         return $this->redirect($this->instagram->getLoginUrl([
             'basic',
+            'public_content',
             'follower_list',
             'relationships'
         ]));
