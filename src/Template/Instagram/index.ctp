@@ -5,18 +5,19 @@ if($loggedIn){
     echo $this->Html->tag('h2', __('Hi, {0}', [$user->data->username]));
     echo $this->Html->para('lead', __('These are the people you are following that aren\'t following you back.'));
 
-    echo $this->Form->create('Instagram', [
-        'url' => '/cleanup'
-    ]);
-
-    debug($usersIAmFollowing);
-    debug($usersFollowedByMe);
-
-    echo $this->Form->submit('Bye, Felicia!', [
-        'class' => 'btn btn-danger'
-    ]);
-
-    echo $this->Form->end();
+    foreach($usersIAmFollowing as $user){
+        echo $this->Html->div('media', implode('', [
+            $this->Html->div('media-left', $this->Html->image($user->profile_picture)),
+            $this->Html->div('media-body', implode('', [
+                $this->Html->div('media-heading', $user->username),
+                $this->Html->div('', $this->Form->postLink(__('Unfollow'), [
+                    'controller' => 'Instagram',
+                    'action' => 'remove',
+                    $user->id
+                ]))
+            ])),
+        ]));
+    }
 
 }else{
     echo $this->Html->tag('h2', __('Unfollow people who don\'t follow you back.'));

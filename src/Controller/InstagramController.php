@@ -87,10 +87,20 @@ class InstagramController extends AppController
         return $this->redirect('/');
     }
 
-    public function cleanup(){
+    public function remove($id){
         if(!$this->request->is('post')){
             return $this->redirect('/');
         }
+
+        $deleted = false;
+
+        if($this->instagram->modifyRelationship('unfollow', $id)){
+            $deleted = true;
+        }
+
+        $this->set('_serialize', [
+            'deleted' => $deleted
+        ]);
 
         debug($this->request->data);
     }
