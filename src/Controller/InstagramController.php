@@ -84,7 +84,6 @@ class InstagramController extends AppController
     public function login(){
         return $this->redirect($this->instagram->getLoginUrl([
             'basic',
-            'public_content',
             'follower_list',
             'relationships'
         ]));
